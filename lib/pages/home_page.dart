@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_zarzal/pages/pages.dart';
+import 'package:qr_zarzal/providers/ui_providers.dart';
 import 'package:qr_zarzal/widgets/widgets.dart';
 
 class HoemPage extends StatelessWidget {
@@ -25,6 +27,16 @@ class HoemPage extends StatelessWidget {
 class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    // cambiar para mostrar la pagina respectiva
+    final uiProviders = Provider.of<UiProviders>(context);
+    final currentIndex = uiProviders.selectedMenuOpt;
+    switch (currentIndex) {
+      case 0:
+        return MapasPage();
+      case 1:
+        return DireccionesPage();
+      default:
+        return MapasPage();
+    }
   }
 }

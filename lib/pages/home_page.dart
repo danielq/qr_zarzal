@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_zarzal/models/scan_model.dart';
 import 'package:qr_zarzal/pages/pages.dart';
+import 'package:qr_zarzal/providers/db_provider.dart';
 import 'package:qr_zarzal/providers/ui_providers.dart';
 import 'package:qr_zarzal/widgets/widgets.dart';
 
@@ -30,6 +32,11 @@ class _HomePageBody extends StatelessWidget {
     // cambiar para mostrar la pagina respectiva
     final uiProviders = Provider.of<UiProviders>(context);
     final currentIndex = uiProviders.selectedMenuOpt;
+    // TODO: Temporal para leer la base de datos
+    DbProvider.db.database;
+    final tempScan =
+        ScanModel(id: null, tipo: '', valor: 'https://www.google.com');
+    DbProvider.db.nuevoScan(tempScan);
     switch (currentIndex) {
       case 0:
         return MapasPage();

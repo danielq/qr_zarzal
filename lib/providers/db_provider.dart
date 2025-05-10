@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_zarzal/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DbProvider {
@@ -31,5 +33,24 @@ class DbProvider {
             )
           ''');
     });
+  }
+
+  Future<int?> nuevoScanRaw(ScanModel nuevoScan) async {
+    // extraer los valores
+    final id = nuevoScan.id;
+    final tipo = nuevoScan.tipo;
+    final valor = nuevoScan.valor;
+    // verificar la base de datos
+    final db = await database;
+    final res = await db?.rawInsert('''
+      insert into Scans(id, tipo, valor) values($id, '$tipo', '$valor')
+    ''');
+    return res;
+  }
+
+  Future<int?> nuevoScan(ScanModel nuevoScan) async {
+    final db = await database;
+    final res = await db?.insert('Scans', nuevoScan.toJson());
+    return res;
   }
 }

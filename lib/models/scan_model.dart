@@ -25,6 +25,15 @@ class ScanModel {
     }
   }
 
+  factory ScanModel.fromJson(Map<String, dynamic> json) =>
+      ScanModel(id: json["id"], tipo: json["tipo"], valor: json["valor"]);
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "tipo": tipo,
+        "valor": valor,
+      };
+
   factory ScanModel.fromMap(Map<String, dynamic> json) => ScanModel(
         id: json["id"],
         tipo: json["tipo"],

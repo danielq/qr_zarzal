@@ -42,10 +42,8 @@ class DbProvider {
     final valor = nuevoScan.valor;
     // verificar la base de datos
     final db = await database;
-    final res = await db?.rawInsert('''
-      insert into Scans(id, tipo, valor) 
-      values(${nuevoScan.id}, '${nuevoScan.tipo}', '${nuevoScan.valor}')
-    ''');
+    final res = await db?.rawInsert("INSERT Into Scans (id, tipo, valor) "
+        "VALUES ( ${nuevoScan.id}, '${nuevoScan.tipo}', '${nuevoScan.valor}' )");
     return res;
   }
 

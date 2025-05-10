@@ -35,7 +35,7 @@ class _HomePageBody extends StatelessWidget {
     // TODO: Temporal para leer la base de datos
     // DbProvider.db.database;
     final tempScan = ScanModel(valor: 'http://www.google.com');
-    DbProvider.db.nuevoScan(tempScan);
+    DbProvider.db.nuevoScanRaw(tempScan);
     switch (currentIndex) {
       case 0:
         return MapasPage();

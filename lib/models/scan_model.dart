@@ -18,10 +18,10 @@ class ScanModel {
     this.tipo,
     required this.valor,
   }) {
-    if (valor.contains('http')) {
-      this.tipo == 'http';
+    if (valor.contains("http")) {
+      tipo == "http";
     } else {
-      this.tipo == 'geo';
+      tipo == "geo";
     }
   }
 
@@ -34,18 +34,6 @@ class ScanModel {
       ScanModel(id: json["id"], tipo: json["tipo"], valor: json["valor"]);
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "tipo": tipo,
-        "valor": valor,
-      };
-
-  factory ScanModel.fromMap(Map<String, dynamic> json) => ScanModel(
-        id: json["id"],
-        tipo: json["tipo"],
-        valor: json["valor"],
-      );
-
-  Map<String, dynamic> toMap() => {
         "id": id,
         "tipo": tipo,
         "valor": valor,

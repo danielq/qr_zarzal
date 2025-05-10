@@ -14,8 +14,8 @@ class ScanModel {
   String valor;
 
   ScanModel({
-    required this.id,
-    required this.tipo,
+    this.id,
+    this.tipo,
     required this.valor,
   }) {
     if (valor.contains('http')) {

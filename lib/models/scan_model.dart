@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-ScanModel scanModelFromMap(String str) => ScanModel.fromMap(json.decode(str));
+ScanModel scanModelFromJson(String str) => ScanModel.fromJson(json.decode(str));
 
-String scanModelToMap(ScanModel data) => json.encode(data.toMap());
+String scanModelToJson(ScanModel data) => json.encode(data.toJson());
 
 class ScanModel {
   int? id;
@@ -18,11 +18,16 @@ class ScanModel {
     required this.tipo,
     required this.valor,
   }) {
-    if (valor.contains('htp')) {
-      tipo == 'http';
+    if (valor.contains('http')) {
+      this.tipo == 'http';
     } else {
-      tipo == 'geo';
+      this.tipo == 'geo';
     }
+  }
+
+  @override
+  String toString() {
+    return 'ID: $id | TIPO: $tipo | VALOR: $valor';
   }
 
   factory ScanModel.fromJson(Map<String, dynamic> json) =>

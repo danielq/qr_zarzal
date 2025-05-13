@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:qr_zarzal/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'package:qr_zarzal/models/scan_model.dart';
+export 'package:qr_zarzal/models/scan_model.dart';
 
 class DbProvider {
   static Database? _database;
@@ -23,7 +25,7 @@ class DbProvider {
     final path = join(documentsDirectory.path, 'ScansDB.db');
     print(path);
     // crear la tabla
-    return await openDatabase(path, version: 1, onOpen: (db) {},
+    return await openDatabase(path, version: 2, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute('''
             CREATE TABLE Scans(
@@ -36,20 +38,14 @@ class DbProvider {
   }
 
   Future<int?> nuevoScanRaw(ScanModel nuevoScan) async {
-    // extraer los valores
-    final id = nuevoScan.id;
-    final tipo = nuevoScan.tipo;
-    final valor = nuevoScan.valor;
-    // verificar la base de datos
+    // Verificar la base de datos
     final db = await database;
-    final res = await db?.rawInsert("INSERT Into Scans (id, tipo, valor) "
-        "VALUES ( ${nuevoScan.id}, '${nuevoScan.tipo}', '${nuevoScan.valor}' )");
-    return res;
-  }
 
-  Future<int?> nuevoScan(ScanModel nuevoScan) async {
-    final db = await database;
-    final res = await db?.insert('Scans', nuevoScan.toJson());
+    final res = await db?.rawInsert('''
+      INSERT INTO Scans( id, tipo, valor )
+        VALUES( ${nuevoScan.id}, '${nuevoScan.tipo}', '${nuevoScan.valor}' )
+    ''');
+
     return res;
   }
 }

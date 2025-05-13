@@ -48,4 +48,10 @@ class DbProvider {
 
     return res;
   }
+
+  Future<int?> nuevoScan(ScanModel nuevoScan) async {
+    final db = await database;
+    final res = await db?.insert('Scans', nuevoScan.toJson());
+    return res;
+  }
 }
